@@ -1,0 +1,118 @@
+* {
+  margin: 0;
+}
+
+body {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.main-block-border{
+  width: 500px;
+  border: 10px solid black;
+  background-color: #000;
+}
+
+.main-block-box {
+  background: linear-gradient(to top, #fefcea, #ddd);
+  height: inherit;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.box-header {
+  background: black;
+  clip-path: polygon(-1px -1px, 30% -1px, 25% 50px, 0 50px);
+  height: 50px;
+}
+
+.box-header p {
+  font-size: 35px;
+  color: orangered;
+  margin-left: 10px;
+}
+
+.box-main-info {
+  padding: 10px;
+}
+
+.box-main-info p {
+  font-size: 18px;
+}
+.box-main-info p::first-letter {
+  color: orangered;
+}
+.box-figures {
+  height: 180px;
+  position: relative;
+}
+
+.abolute-figure{
+  position: absolute;
+  width: 100px;
+  height: 80px;
+  border: 1px solid black;
+  background-color: palevioletred;
+  transform: rotate(45deg);
+  top: 50px;
+}
+
+.abolute-figure {
+  color: #fff;
+  padding: 5px 10px;
+}
+
+.abolute-figure-1 {
+  left: 10%;
+}
+.abolute-figure-2 {
+  left: calc(10% + 50px);
+}
+.abolute-figure-3 {
+  left: calc(10% + 100px);
+}
+
+.absolute-text {
+  position: absolute;
+  top: calc(50% - 20px);
+  left: calc(10% + 30px);
+}
+
+.absolute-text p {
+  font-size: 40px;
+  animation: color-change 3s infinite;
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
+
+.link {
+  text-decoration: none;
+  color: orangered;
+  font-size: 20px;
+  line-height: 30px;
+}
+.link:hover {
+  text-decoration: underline;
+}
+
+@keyframes color-change {
+  0% { color: red; }
+  15% {color: orange}
+  30% {color: yellow}
+  45% {color: green}
+  60% { color: lightskyblue; }
+  75% { color: blue; }
+  90% { color: purple; }
+  100% { color: red; }
+}

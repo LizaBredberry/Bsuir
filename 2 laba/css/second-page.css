@@ -1,0 +1,96 @@
+* {
+  margin: 0;
+}
+
+body {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.main-block{
+  width: 500px;
+  border-radius: 15px;
+}
+.main-block-title {
+  font-weight: bold;
+  font-size: 30px;
+  align-items: center;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+header {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  height: 50px;
+  align-items: center;
+  justify-items: center;
+
+}
+header div,header a , header a img {
+  height: inherit;
+  border-radius: 15px 15px 0 0;
+  background-color: orangered;
+}
+.banner {
+  box-sizing: border-box;
+  border: 6px double #000; 
+  height: 50px;
+  object-fit: fill;
+  width: 100%;
+}
+.section-block-box {
+  border-radius: 0 0 15px 15px;
+  box-shadow: 0 0px 30px 5px black;
+  background-color: orangered;
+}
+.section-block {
+  padding: 10px;
+}
+.section-block-title {
+  font-size: 25px;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+.section-block-table {
+  background-color: #f44336;
+}
+
+.section-block-table, .table-row, .table-row-full{
+  display: grid;
+  font-size: 17px;
+  border: 1px solid black;
+}
+.table-row:hover, .table-row-full:hover{
+  border: 1px solid orange;
+  cursor: pointer;
+  background: orange;
+}
+.table-row, .table-row-full {
+  box-sizing: content-box;
+}
+.table-row-full {
+  grid-template-columns: 1fr;
+  justify-items: center;
+  font-weight: bold;
+  font-size: 20px;
+}
+.table-row {
+  grid-template-columns: 70% 30%;
+  padding-left: 10px;
+}
+.table-row p:first-child{
+  border-right: 2px solid black;
+}
+
+.table-row p:last-child{
+  justify-self: center;
+}
