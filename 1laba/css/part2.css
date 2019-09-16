@@ -1,0 +1,191 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: 'Myriad Pro';
+}
+.container {
+  width: calc(100% - 20px);
+  margin: 10px;
+}
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  min-height: calc(100vh - 20px);
+  background: url(../assets/no-mans-sky-hello-games.jpg);
+  opacity: 0.7;
+}
+.main-grid-block {
+  text-align: center;
+	border: 20px solid black;
+  background-image: url('../assets/world.jpg'); 
+  background-origin: border-box;
+  width: 100%;
+  opacity: 0.9;
+}
+.grid-area-first{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.grid-area-block {
+  /* height: 100%; */
+  display: grid;
+  grid-template-rows: 40px 100%;
+  justify-items: center;
+}
+.grid-area-column{
+  margin: 10px;
+  height: calc(100vh - 125px);
+  display: inherit;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  border: 2px solid #ff5410;
+}
+.grid-area-column p:not(:last-child){
+  border-bottom: 2px solid #ff5410;
+}
+.t-s-1 {
+  text-shadow: 1px 1px 2px black, 0 0 1em rgb(243, 32, 155);
+}
+
+.t-s-2 {
+  text-shadow: 3px 3px 2px black, 1px 1px 1em rgb(243, 32, 155);
+
+}
+.t-s-3 {
+  text-shadow: -1px -1px 2px black, -1px -1px 1em rgb(243, 32, 155);
+}
+.t-s-4 {
+  text-shadow: 5px 5px 5px black, 5px 5px 5px rgb(243, 32, 155);
+}
+.area-text-1 {
+  font-size: 12px;
+  color: green;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.area-text-2 {
+  font-size: 14px;
+  color: orange;
+  font-family:'Myriad Pro';
+}
+.area-text-3 {
+  font-size: 18px;
+  color: orangered;
+  font-family: 'Times New Roman', Times, serif;
+}
+.area-text-4 {
+  font-size: 24px;
+  color: purple;
+  font-family:  'Courier New', Courier, monospace;
+}
+.area-text-5 {
+  font-size: 21px;
+  color: palegreen;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.area-text-6 {
+  font-size: 15px;
+  color: rgb(76, 76, 76);
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif';
+}
+
+/* h1 {
+  font-size: 220%;
+  color: purple;
+} */
+h2 {
+  font-size: 150%;
+  color: palevioletred;
+}
+
+.grid-area-second {
+  position: relative;
+}
+.area-object {
+  position: absolute;
+  /* background: url(../assets/travel.jpg); */
+  /* object-fit: cover; */
+  width: 200px;
+  /* height: 100px; */
+  animation: floatText 5s infinite alternate ease-in-out;
+}
+.f-s-220 {
+  font-size: 220%;
+}
+.t-s-4.f-s-220 {
+  color: red;
+}
+.origin-block {
+  width: 100%;
+  height: 90vh;
+}
+
+.origin-images{
+  
+}
+.origin-images-2 {
+  background-position: left top, 200px 100px;
+
+}
+.origin-images-3 {
+  background-position: left top, 300px 200px;
+
+}
+.absolute-image{
+  position: absolute;
+  width: 400px;
+  height: 200px;
+  object-fit: cover;
+  border: 2px solid black;
+}
+.absolute-image-1 {
+  top: 50%;
+  left: 10%;
+}
+.absolute-image-2 {
+  top: calc(50% + 50px);
+  left: 20%;
+}
+.absolute-image-3 {
+  top: calc(50% + 100px);
+  left: 30%;
+}
+@keyframes floatText{
+  0% {
+    left: 0px;
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(360deg);
+    left: calc(100% - 200px);
+  }
+}
+@media (max-width: 1000px) {
+  .grid-area-first{
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .absolute-image {
+    width: 200px;
+    height: 100px;
+  }
+  .absolute-image-1 {
+    top: 20%;
+    left: 20%;
+  }
+  .absolute-image-2 {
+    top: calc(20% + 50px);
+    left: 25%;
+  }
+  .absolute-image-3 {
+    top: calc(20% + 100px);
+    left: 30%;
+  }
+}
