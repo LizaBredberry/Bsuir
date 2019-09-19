@@ -55,6 +55,14 @@ footer {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.line {
+  width: 100%;
+  background-color: #fff;
+  padding: 20px 0;
+  text-align: center;
+  box-shadow: 0px 2px 10px -3px #696969;
+}
 h1 {
   font-size: 1.8rem;
 }
@@ -166,7 +174,18 @@ table {
 th, td {
   border-style: solid;
   border-width: 1px 1px 1px 1px;
-  border-color: black;
+  border-color: rgba(54, 54, 54, 0.72);
+  padding: 3px;
+  font-size: 1rem;
+}
+
+th {
+  background-color: rgba(54, 54, 54, 0.72);
+  color: #fff;
+}
+td {
+  background-color: #ddd;
+  color: 
 }
 .t-a-s{
   text-align: center;
