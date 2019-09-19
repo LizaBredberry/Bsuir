@@ -6,12 +6,14 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
 header {
   box-shadow:-1px 2px 24px -6px #696969;
   position: relative;
   border: none;
   outline: medium none;
 }
+
 .header, .container, footer {
   font-size: 16px;
   display: flex;
@@ -38,6 +40,7 @@ footer {
   font-size: 0.8rem;
   padding: 0 100px;
   justify-content: space-between;
+  align-items: center;
 }
 
 .nav-bar, .side-bar {
@@ -63,9 +66,11 @@ footer {
   text-align: center;
   box-shadow: 0px 2px 10px -3px #696969;
 }
+
 h1 {
   font-size: 1.8rem;
 }
+
 .info-text {
   font-size: 1.2rem;
   color: rgb(120, 120, 120);
@@ -82,10 +87,12 @@ h1 {
   padding: 10px;
   margin: 5px 0;
 }
+
 .nav-bar a.active{
   background: #fff;
   color: rgba(54, 54, 54, 0.72);
 }
+
 .main-block {
   margin: 20px 0;
   border: 1px solid #ddd;
@@ -98,9 +105,11 @@ h1 {
 .form .field, .main-block .field {
   padding: 10px;
 }
+
 .form .field:not(:last-child), .main-block .field:not(:last-child) {
   border-bottom: 1px solid #ddd;
 }
+
 .form .field input[type="text"],form .field select, .form textarea, .form .field input[type="email"]{
   padding: 7px;
   margin-top: 5px;
@@ -109,13 +118,16 @@ h1 {
   background:#efefef;
   width: calc(100% - 16px);
 }
+
 .checkbox-box {
   display: flex;
   align-items: center;
 }
+
 .checkbox-box label{
   margin-right: 10px;
 }
+
 .form .field input[type="checkbox"],form .field input[type="radio"]{
   margin-right: 5px;
 }
@@ -123,11 +135,13 @@ h1 {
 .form .field select {
   width: 100%;
 }
+
 .form textarea {
   resize: none;
   height: 100px;
   outline: none;
 }
+
 .main-block button {
   background-color: rgba(54, 54, 54, 0.72);
   border: none;
@@ -140,15 +154,9 @@ h1 {
   display: inline-block;
   outline: none;
 }
+
 #button {
   transition: all .5s ease;
-}
-
-.success{
-  background: #24ff57 !important;
-}
-.error {
-  background: #ff3333 !important;
 }
 
 .button-field {
@@ -156,6 +164,7 @@ h1 {
   flex-direction: row;
   justify-content: space-between
 }
+
 input, label, button, select, option {
   cursor: pointer;
 }
@@ -183,13 +192,22 @@ th {
   background-color: rgba(54, 54, 54, 0.72);
   color: #fff;
 }
+
 td {
   background-color: #ddd;
-  color: 
 }
+
 .t-a-s{
   text-align: center;
 }
+
+.success{
+  background: #24ff57 !important;
+}
+.error {
+  background: #ff3333 !important;
+}
+
 @media(max-width:920px) {
   h1 {
     font-size: 1rem;
