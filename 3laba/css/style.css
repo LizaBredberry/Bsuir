@@ -7,6 +7,11 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+.flex-container {
+  display: flex;
+  flex-direction: column;
+}
+
 header {
   box-shadow:-1px 2px 24px -6px #696969;
   position: relative;
@@ -31,6 +36,7 @@ header {
   background-color: #f5f5f5;
   min-height: calc(100vh - 120px);
   width: 100%;
+  justify-content: space-between;
 }
 
 footer {
@@ -94,7 +100,7 @@ h1 {
 }
 
 .main-block {
-  margin: 20px 0;
+  margin: 10px 0;
   border: 1px solid #ddd;
   min-width: 500px;
   border-radius: 5px;
@@ -103,7 +109,7 @@ h1 {
 }
 
 .form .field, .main-block .field {
-  padding: 10px;
+  padding: 5px;
 }
 
 .form .field:not(:last-child), .main-block .field:not(:last-child) {
@@ -138,7 +144,7 @@ h1 {
 
 .form textarea {
   resize: none;
-  height: 100px;
+  height: 50px;
   outline: none;
 }
 
@@ -155,21 +161,31 @@ h1 {
   outline: none;
 }
 
-#button {
-  transition: all .5s ease;
-}
-
 .button-field {
   width: 100%;
   flex-direction: row;
   justify-content: space-between
 }
 
-input, label, button, select, option {
+label, button, option, input[type="radio"], input[type="checkbox"] {
   cursor: pointer;
 }
 .button-field button{
-  width: calc(50% - 12px);
+  width: calc(50% - 7px);
+}
+button {
+  height: 35px;
+  transition: all .2s ease;
+}
+
+button:hover {
+  transform: translateY(-0.3rem);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .4);
+}
+
+button:active {
+  transform: translateY(-0.1rem);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
 }
 
 table {
@@ -182,8 +198,7 @@ table {
 
 th, td {
   border-style: solid;
-  border-width: 1px 1px 1px 1px;
-  border-color: rgba(54, 54, 54, 0.72);
+  border-color: rgba(54, 54, 54, 0.9);
   padding: 3px;
   font-size: 1rem;
 }
@@ -202,10 +217,10 @@ td {
 }
 
 .success{
-  background: #24ff57 !important;
+  background: #3dc95e !important;
 }
 .error {
-  background: #ff3333 !important;
+  background: hsl(0, 59%, 49%) !important;
 }
 
 @media(max-width:920px) {

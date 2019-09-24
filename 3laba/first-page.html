@@ -8,81 +8,83 @@
   <title>Main page</title>
 </head>
 <body>
-  <header>
-    <div class="header">
-      <img src="./assets/logo.svg" alt="logo">
-      <h1>Магазин ноутбуков Xiaomi</h1>
-      <span class="info-text"> +375 (29) 182-78-43</span>
-      <span class="info-text"> 10:00 – 21:00</span>
-    </div>
-  </header>
-  <div class="container">
-    <nav class="nav-bar">
-      <a href="first-page.html" class="active">Главная</a>
-      <a href="second-page.html">Результаты</a>
-    </nav>
-    <section class="main-page">
-      <div class="line">
-        <h2>Предпочтения о ноутбуке</h2>
+  <div class="flex-container">
+    <header>
+      <div class="header">
+        <img src="./assets/logo.svg" alt="logo">
+        <h1>Магазин ноутбуков Xiaomi</h1>
+        <span class="info-text"> +375 (29) 182-78-43</span>
+        <span class="info-text"> 10:00 – 21:00</span>
       </div>
-      <div class="main-block">
-        <form class="form" id="form1">
-          <div class="field">
-            <p>Модель ноутбука</p>
-            <input type="text" id="name" name="model">
-            <input type="hidden" id="hidden" name="hidden" value="secretNumber">
-          </div>
-          <div class="field">
-            <p>Оперативная память</p>
-            <div class="checkbox-box">
-              <input type="checkbox" name="option1" id="option1" value="16">
-              <label for="option1">16GB</label>
-              <input type="checkbox" name="option2" id="option2" value="8">
-              <label for="option2">8GB</label>
-              <input type="checkbox" name="option3" id="option3" value="4">
-              <label for="option2">4GB</label>
-            </div>
-          </div>
-          <div class="field">
-            <p>Процессор</p>
-            <select id="list"> 
-              <option value="Intel">Intel</option> 
-              <option value="AMD">AMD</option> 
-              <option value="Qualcom">Qualcom</option> 
-            </select> 
-          </div>
-          <div class="field">
-            <p>Цвет</p>
-            <div class="checkbox-box">
-              <input type="radio" id="radio-1" name="radio" value="Чёрный">
-              <label for="radio-1">Чёрный</label>
-              <input type="radio" id="radio-2" name="radio" value="Белый">
-              <label for="radio-2">Белый</label>
-              <input type="radio" id="radio-3" name="radio" value="Золотой">
-              <label for="radio-3">Золотой</label>
-            </div>
-          </div>
-          <div class="field">
-            <p>Комментарий</p>
-            <textarea id="textarea"></textarea>
-          </div>
-          <div class="field">
-            <p>Email</p>
-            <input type="email" id="email">
-          </div>
-        </form>
-        <div class="field button-field">
-          <button id="button" type="button" onclick="submit()">Отправить</button>
-          <button type="button" onclick="clearFields()">Очистить</button>
+    </header>
+    <div class="container">
+      <nav class="nav-bar">
+        <a href="first-page.html" class="active">Главная</a>
+        <a href="second-page.html">Результаты</a>
+      </nav>
+      <section class="main-page">
+        <div class="line">
+          <h2>Предпочтения о ноутбуке</h2>
         </div>
-      </div>
-    </section>
-    <section class="side-bar"></section>
+        <div class="main-block">
+          <form class="form" id="form1">
+            <div class="field">
+              <p>Модель ноутбука</p>
+              <input type="text" id="name" name="model">
+              <input type="hidden" id="hidden" name="hidden" value="secretNumber">
+            </div>
+            <div class="field">
+              <p>Оперативная память</p>
+              <div class="checkbox-box">
+                <input type="checkbox" name="option1" id="option1" value="16">
+                <label for="option1">16GB</label>
+                <input type="checkbox" name="option2" id="option2" value="8">
+                <label for="option2">8GB</label>
+                <input type="checkbox" name="option3" id="option3" value="4">
+                <label for="option2">4GB</label>
+              </div>
+            </div>
+            <div class="field">
+              <p>Процессор</p>
+              <select id="list"> 
+                <option value="Intel">Intel</option> 
+                <option value="AMD">AMD</option> 
+                <option value="Qualcom">Qualcom</option> 
+              </select> 
+            </div>
+            <div class="field">
+              <p>Цвет</p>
+              <div class="checkbox-box">
+                <input type="radio" id="radio-1" name="radio" value="Чёрный">
+                <label for="radio-1">Чёрный</label>
+                <input type="radio" id="radio-2" name="radio" value="Белый">
+                <label for="radio-2">Белый</label>
+                <input type="radio" id="radio-3" name="radio" value="Золотой">
+                <label for="radio-3">Золотой</label>
+              </div>
+            </div>
+            <div class="field">
+              <p>Комментарий</p>
+              <textarea id="textarea"></textarea>
+            </div>
+            <div class="field">
+              <p>Email</p>
+              <input type="email" id="email">
+            </div>
+          </form>
+          <div class="field button-field">
+            <button id="button" type="button" onclick="submit()">Отправить</button>
+            <button type="button" onclick="clearFields()">Очистить</button>
+          </div>
+        </div>
+      </section>
+      <section class="side-bar"></section>
+    </div>
+    <footer>
+      <p>© 2017–2019 Общество с ограниченной ответственностью "МИ БАЙ" 224030 г. Брест, ул. Советская, д.56</p>
+      <p>Разработка интернет-магазина — Новый сайт</p>
+    </footer>
   </div>
-  <footer>
-    <p>© 2017–2019 Общество с ограниченной ответственностью "МИ БАЙ" 224030 г. Брест, ул. Советская, д.56</p>
-    <p>Разработка интернет-магазина — Новый сайт</p>
-  </footer>
   <script src="./js/index.js"></script>
 </body>
 </html>

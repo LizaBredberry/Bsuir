@@ -56,7 +56,7 @@ function addItem(array) { // тут просто добавляем данные
     email: document.getElementById('email').value
   }
   array.push(formObject)
-  clearFields() // чистит поля формы
+  // clearFields() // чистит поля формы
   return array
 }
 
@@ -82,33 +82,35 @@ window.onload = function() { // этот метод срабатывает ка�
 function tableCreate() { // при каждом обновлении создаём таблицу из данных в LocalStorage
   let formData = JSON.parse(localStorage.getItem('form')) // Получаем данные из LocalStorage
   let tableId = document.getElementById('table')
-  let tableElem = document.createElement('table')
-  let tbodyElem = document.createElement('tbody')
-  if (formData) { // тут строим таблицу, строки и столбцы
-    for (let i = 0; i < formData.length; i++) { // цикл строк
-      if (i === 0) {// условие для построение главной шапки таблицы
-        let tr = document.createElement('tr')
-        for(let j = 0; j < tableHeader.length; j++) { 
-          let th = document.createElement('th')
-          th.appendChild(document.createTextNode(tableHeader[j])) // добавляет текст в тег
-          tr.appendChild(th)
-          tbodyElem.appendChild(tr)
+  if (tableId) {
+    let tableElem = document.createElement('table')
+    let tbodyElem = document.createElement('tbody')
+    if (formData) { // тут строим таблицу, строки и столбцы
+      for (let i = 0; i < formData.length; i++) { // цикл строк
+        if (i === 0) {// условие для построение главной шапки таблицы
+          let tr = document.createElement('tr')
+          for(let j = 0; j < tableHeader.length; j++) { 
+            let th = document.createElement('th')
+            th.appendChild(document.createTextNode(tableHeader[j])) // добавляет текст в тег
+            tr.appendChild(th)
+            tbodyElem.appendChild(tr)
+          }
         }
+        let tr = document.createElement('tr')
+        for (let key in formData[i]) { // цикл столбцов
+          let td = document.createElement('td')
+          td.appendChild(document.createTextNode(formData[i][key])) // добавляет текст в тег
+          tr.appendChild(td)
+        }
+        tbodyElem.appendChild(tr)
       }
-      let tr = document.createElement('tr')
-      for (let key in formData[i]) { // цикл столбцов
-        let td = document.createElement('td')
-        td.appendChild(document.createTextNode(formData[i][key])) // добавляет текст в тег
-        tr.appendChild(td)
-      }
-      tbodyElem.appendChild(tr)
+    } else {
+      tableId.appendChild(document.createTextNode('Таблица пуста'))
+      tableId.classList.add('t-a-s') // добавляем класс
     }
-  } else {
-    tableId.appendChild(document.createTextNode('Таблица пуста'))
-    tableId.classList.add('t-a-s') // добавляем класс
+    tableElem.appendChild(tbodyElem)
+    tableId.appendChild(tableElem)
   }
-  tableElem.appendChild(tbodyElem)
-  tableId.appendChild(tableElem)
 }
 
 function clearStoreFields() { // метод для очистки всей таблицы
