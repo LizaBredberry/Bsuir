@@ -87,16 +87,12 @@ h1 {
   flex-direction: column;
 }
 
-.nav-bar a{
-  text-decoration: none;
-  color: #fff;
-  padding: 10px;
-  margin: 5px 0;
-}
-
-.nav-bar a.active{
+.nav-bar p{
   background: #fff;
   color: rgba(54, 54, 54, 0.72);
+  padding: 10px;
+  margin: 5px 0;
+  cursor: pointer;
 }
 
 .main-block {
@@ -117,14 +113,17 @@ h1 {
 }
 
 .form .field input[type="text"],form .field select, .form textarea, .form .field input[type="email"]{
-  padding: 7px;
+  padding: 7px 0px;
   margin-top: 5px;
   border-radius: 3px;
   border: 1px solid #b6b6b6;
   background:#efefef;
-  width: calc(100% - 16px);
+  width: 100%;
 }
-
+.form textarea {
+  padding: 0;
+  font-size: 1rem;
+}
 .checkbox-box {
   display: flex;
   align-items: center;
@@ -162,16 +161,15 @@ h1 {
 }
 
 .button-field {
-  width: 100%;
-  flex-direction: row;
-  justify-content: space-between
+  display: flex;
+  justify-content: space-between;
 }
 
 label, button, option, input[type="radio"], input[type="checkbox"] {
   cursor: pointer;
 }
 .button-field button{
-  width: calc(50% - 7px);
+  width: calc(50% - 10px);
 }
 button {
   height: 35px;

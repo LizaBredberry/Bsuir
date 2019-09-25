@@ -1,50 +1,38 @@
-const tableHeader = ['Ноубук', 'Память', 'Процессор', 'Цвет', 'Комментарий', 'Email'] // названия ячеек таблица
-
-function submit() { // метод, который используется при нажатии на кнопку "Отправить"
-  if (validation()) { // если все поля валидны, то проходим
+const tableHeader = ['Ноубук', 'Память', 'Процессор', 'Цвет', 'Комментарий', 'Email']
+let tableInfo = []
+function submit() {
+  if (validation()) {
     document.getElementById('button').classList.add('success')
-    setItems() // Этот метод добавляет данные формы в LOCALSTORAGE (браузерное хранилище данных, что-то типо маленькой фейковой базы данных)
-    setTimeout(() => { // окрашиваем кнопку в зелённый если всё хорошо на 300 мс
+    setItems()
+    setTimeout(() => {
       document.getElementById('button').classList.remove('success')
     }, 300)
   } else {
-    document.getElementById('button').classList.add('error') //окрашиваем кнопку в зелённый если всё плохо (поля не валидны) на 300 мс
+    document.getElementById('button').classList.add('error')
     setTimeout(() => {
       document.getElementById('button').classList.remove('error')
     }, 300)
   }
 }
-function validation() { // проверка всех полей
+function validation() {
   const reEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/i
-  if (document.getElementById('name').value === '' // тут проверяем, заполнены ли все поля
+  if (document.getElementById('name').value === ''
   || document.getElementById('textarea').value === ''
   || document.getElementById('email').value === ''
   || document.getElementById('list').options[document.getElementById('list').selectedIndex].value === ''
   || document.querySelector('[type="radio"]:checked').value === '') {
     return false
   }
-  if (!document.querySelectorAll('[type="checkbox"]:checked').length) { // отдельная проверка на выбор хотя бы одного чекбокса
+  if (!document.querySelectorAll('[type="checkbox"]:checked').length) {
     return false
   }
-  if (!reEmail.test(document.getElementById('email').value)) { // проверка email на корректность, с помощью регулярного выражения (то длинное сверху) P.s. не надо знать, как оно работает)
+  if (!reEmail.test(document.getElementById('email').value)) {
     return false
   }
-  return true // если всё збс, идём дальше
+  return true
 }
 
-function setItems() { // тут Добавляем данные
-  let formData = JSON.parse(localStorage.getItem('form')) // вытягиваем данные с LocalStorage и преобразуем их в обычный массив
-  let array = []
-  if (formData) { // если в localStorage что-то есть, то в полученный массив добавляем данные с формы 
-    array = addItem(formData)
-    localStorage.setItem('form', JSON.stringify(array)) // теперь заменяем старые данные на новые в localStorage
-  } else { // если ничего в localStorage нет, то добавляем 
-    array = addItem([])
-    localStorage.setItem('form', JSON.stringify(array)) // тут устанавливаем новые данные в localStorage, так как там ничего не было
-  }
-}
-
-function addItem(array) { // тут просто добавляем данные формы в существующий массив данных, который приходит по параметрам
+function setItems() {
   let memory = []
   document.querySelectorAll('[type="checkbox"]:checked').forEach(item => memory.push(item.value))
   let formObject = {
@@ -55,12 +43,11 @@ function addItem(array) { // тут просто добавляем данные
     comment: document.getElementById('textarea').value,
     email: document.getElementById('email').value
   }
-  array.push(formObject)
-  // clearFields() // чистит поля формы
-  return array
+  tableInfo.push(formObject)
+  clearFields()
 }
 
-function clearFields() { // чистит поля формы
+function clearFields() {
   document.getElementById('name').value = ''
   document.getElementById('textarea').value = ''
   document.getElementById('email').value = ''
@@ -75,47 +62,198 @@ function clearFields() { // чистит поля формы
   }
 }
 
-window.onload = function() { // этот метод срабатывает каждый раз, когда страница перезагружается или происходит переход между вкладками
-  tableCreate() 
-}
-
-function tableCreate() { // при каждом обновлении создаём таблицу из данных в LocalStorage
-  let formData = JSON.parse(localStorage.getItem('form')) // Получаем данные из LocalStorage
-  let tableId = document.getElementById('table')
-  if (tableId) {
-    let tableElem = document.createElement('table')
-    let tbodyElem = document.createElement('tbody')
-    if (formData) { // тут строим таблицу, строки и столбцы
-      for (let i = 0; i < formData.length; i++) { // цикл строк
-        if (i === 0) {// условие для построение главной шапки таблицы
-          let tr = document.createElement('tr')
-          for(let j = 0; j < tableHeader.length; j++) { 
-            let th = document.createElement('th')
-            th.appendChild(document.createTextNode(tableHeader[j])) // добавляет текст в тег
-            tr.appendChild(th)
-            tbodyElem.appendChild(tr)
-          }
-        }
-        let tr = document.createElement('tr')
-        for (let key in formData[i]) { // цикл столбцов
-          let td = document.createElement('td')
-          td.appendChild(document.createTextNode(formData[i][key])) // добавляет текст в тег
-          tr.appendChild(td)
-        }
-        tbodyElem.appendChild(tr)
-      }
-    } else {
-      tableId.appendChild(document.createTextNode('Таблица пуста'))
-      tableId.classList.add('t-a-s') // добавляем класс
+function clearTable() {
+  if (tableInfo.length) {
+    document.getElementsByTagName('tbody')[0].remove()
+    let tbody = document.createElement('tbody')
+    let tr = document.createElement('tr')
+    let td = document.createElement('td')
+    for(let i = 0; i < tableHeader.length; i++) { 
+      let th = document.createElement('th')
+      th.append(document.createTextNode(tableHeader[i])) // добавляет текст в тег
+      tr.append(th)
     }
-    tableElem.appendChild(tbodyElem)
-    tableId.appendChild(tableElem)
+    tbody.append(tr)
+    td.setAttribute('colspan', 6)
+    td.append(document.createTextNode('Таблица пуста'))
+    tr = document.createElement('tr')
+    tr.append(td)
+    tbody.append(tr)
+    document.getElementsByTagName('table')[0].append(tbody)
+    tableInfo = []
   }
 }
 
-function clearStoreFields() { // метод для очистки всей таблицы
-  localStorage.removeItem('form') // очищает LocalStorage
-  document.getElementsByTagName('tbody')[0].remove() // сносит внутренность таблицы
-  document.getElementById('table').appendChild(document.createTextNode('Таблица пуста'))
-  document.getElementById('table').classList.add('t-a-s')
+function tableCreate() {
+  if (tableInfo.length) {
+    let tbodyInner = ''
+    for (let i = 0; i < tableInfo.length + 1; i++) {
+      tbodyInner = tbodyInner + '<tr>'
+      for (let key in tableInfo[i]) {
+        tbodyInner = tbodyInner + '<td>' + tableInfo[i][key] + '</td>'
+      }
+      tbodyInner = tbodyInner + '</tr>'
+    }
+    return tbodyInner
+  } else {
+    return '<tr><td colspan="6">Таблица пуста</td></tr>'
+  }
+}
+
+function changeToTablePage() {
+  document.open()
+  document.write(
+    '<head>' +
+      '<meta charset="UTF-8">' +
+      '<meta name="viewport" content="width=device-width, initial-scale=1.0">' +
+      '<meta http-equiv="X-UA-Compatible" content="ie=edge">' +
+      '<link rel="stylesheet" href="css/style.css">' +
+      '<title>Main page</title>' +
+    '</head>' +
+    '<body>' +
+      '<div class="flex-container">' +
+        '<header>' +
+          '<div class="header">' +
+            '<img src="./assets/logo.svg" alt="logo">' +
+            '<h1>Магазин ноутбуков Xiaomi</h1>' +
+            '<span class="info-text"> +375 (29) 182-78-43</span>' +
+            '<span class="info-text"> 10:00 – 21:00</span>' +
+          '</div>' +
+        '</header>' +
+        '<div class="container">' +
+          '<nav class="nav-bar">' +
+            '<p onclick="changeToMainPage()">Главная</p>' +
+            '<p>Результаты</p>' +
+          '</nav>' +
+          '<section class="main-page">' +
+            '<div class="line">' +
+              '<h2>Результаты</h2>' +
+            '</div>' +
+            '<div class="main-block">' +
+              '<div class="field">' +
+                '<h3 class="t-a-s">Таблица</h3>' +
+              '</div>' +
+              '<div class="field" id="table">' +
+                '<table>' +
+                  '<tbody>' +
+                    '<tr>' +
+                      '<th>Ноубук</th>' +
+                      '<th>Память</th>' +
+                      '<th>Процессор</th>' +
+                      '<th>Цвет</th>' +
+                      '<th>Комментарий</th>' +
+                      '<th>Email</th>' +
+                    '</tr>' +
+                    tableCreate() +
+                  '</tbody>' +
+                '</table>' +
+              '</div>' +
+              '<div class="field">' +
+                '<button type="button" onclick="clearTable()">Очистить</button>' +
+              '</div>' +
+            '</div>' +
+          '</section>' +
+          '<section class="side-bar"></section>' +
+        '</div>' +
+        '<footer>' +
+          '<p>© 2017–2019 Общество с ограниченной ответственностью "МИ БАЙ" 224030 г. Брест, ул. Советская, д.56</p>' +
+          '<p>Разработка интернет-магазина — Новый сайт</p>' +
+        '</footer>' +
+      '</div>' +
+    '</body>'
+  )
+  document.close()
+}
+
+function changeToMainPage() {
+  document.open()
+  document.write(
+    '<head>' +
+      '<meta charset="UTF-8">' +
+      '<meta name="viewport" content="width=device-width, initial-scale=1.0">' +
+      '<meta http-equiv="X-UA-Compatible" content="ie=edge">' +
+      '<link rel="stylesheet" href="css/style.css">' +
+      '<title>Main page</title>' +
+    '</head>' +
+    '<body>' +
+      '<div class="flex-container">' +
+        '<header>' +
+          '<div class="header">' +
+            '<img src="./assets/logo.svg" alt="logo">' +
+            '<h1>Магазин ноутбуков Xiaomi</h1>' +
+            '<span class="info-text"> +375 (29) 182-78-43</span>' +
+            '<span class="info-text"> 10:00 – 21:00</span>' +
+          '</div>' +
+        '</header>' +
+        '<div class="container">' +
+          '<nav class="nav-bar">' +
+            '<p>Главная</p>' +
+            '<p onclick="changeToTablePage()">Результаты</p>' +
+          '</nav>' +
+          '<section class="main-page">' +
+            '<div class="line">' +
+              '<h2>Предпочтения о ноутбуке</h2>' +
+            '</div>' +
+            '<div class="main-block">' +
+              '<form class="form" id="form1">' +
+                '<div class="field">' +
+                  '<p>Модель ноутбука</p>' +
+                  '<input type="text" id="name" name="model">' +
+                  '<input type="hidden" id="hidden" name="hidden" value="secretNumber">' +
+                '</div>' +
+                '<div class="field">' +
+                  '<p>Оперативная память</p>' +
+                  '<div class="checkbox-box">' +
+                    '<input type="checkbox" name="option1" id="option1" value="16">' +
+                    '<label for="option1">16GB</label>' +
+                    '<input type="checkbox" name="option2" id="option2" value="8">' +
+                    '<label for="option2">8GB</label>' +
+                    '<input type="checkbox" name="option3" id="option3" value="4">' +
+                    '<label for="option2">4GB</label>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="field">' +
+                  '<p>Процессор</p>' +
+                  '<select id="list">' +
+                    '<option value="Intel">Intel</option>' +
+                    '<option value="AMD">AMD</option>' +
+                    '<option value="Qualcom">Qualcom</option>' +
+                  '</select>' +
+                '</div>' +
+                '<div class="field">' +
+                  '<p>Цвет</p>' +
+                  '<div class="checkbox-box">' +
+                    '<input type="radio" id="radio-1" name="radio" value="Чёрный">' +
+                    '<label for="radio-1">Чёрный</label>' +
+                    '<input type="radio" id="radio-2" name="radio" value="Белый">' +
+                    '<label for="radio-2">Белый</label>' +
+                    '<input type="radio" id="radio-3" name="radio" value="Золотой">' +
+                    '<label for="radio-3">Золотой</label>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="field">' +
+                  '<p>Комментарий</p>' +
+                  '<textarea id="textarea"></textarea>' +
+                '</div>' +
+                '<div class="field">' +
+                  '<p>Email</p>' +
+                  '<input type="email" id="email">' +
+                '</div>' +
+              '</form>' +
+              '<div class="field button-field">' +
+                '<button id="button" type="button" onclick="submit()">Отправить</button>' +
+                '<button type="button" onclick="clearFields()">Очистить</button>' +
+              '</div>' +
+            '</div>' +
+          '</section>' +
+          '<section class="side-bar"></section>' +
+        '</div>' +
+        '<footer>' +
+          '<p>© 2017–2019 Общество с ограниченной ответственностью "МИ БАЙ" 224030 г. Брест, ул. Советская, д.56</p>' +
+          '<p>Разработка интернет-магазина — Новый сайт</p>' +
+        '</footer>' +
+      '</div>' +
+    '</body>'
+  )
+  document.close()
 }
