@@ -59,20 +59,14 @@ function validateField(type, inputName) {
 }
 
 function checkValidField(type, inputName) {
-  if (document.querySelector(type + '[name=\"' + inputName + '\"]').value === '') {
-    document.querySelector(type + '[name=\"' + inputName + '\"]').classList.add('error')
+  if (document.querySelector(type + '[name=\"' + inputName + '\"]').value.trim() === '') {
+    document.getElementById(inputName).classList.add('error')
     setTimeout(() => {
-      document.querySelector(type + '[name=\"' + inputName + '\"]').classList.remove('error')
+      document.getElementById(inputName).classList.remove('error')
     }, 300)
     return true
   } else if (inputName === 'select' || inputName === 'radio') {
     if (inputName === 'radio' && !document.querySelector('[type="radio"]:checked')) {
-      document.getElementById(inputName).classList.add('error')
-      setTimeout(() => {
-        document.getElementById(inputName).classList.remove('error')
-      }, 300)
-    }
-    if (inputName === 'select' && document.getElementById('select').options[document.getElementById('select').selectedIndex].value) {
       document.getElementById(inputName).classList.add('error')
       setTimeout(() => {
         document.getElementById(inputName).classList.remove('error')

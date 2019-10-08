@@ -218,9 +218,21 @@ td {
   background: #3dc95e !important;
 }
 .error {
-  background: hsl(0, 59%, 49%) !important;
+  position: relative;
 }
-
+.cross {
+  display: none;
+}
+.error .cross{
+  position: absolute;
+  display: block !important;
+  right: 20px;
+  top: calc(50% - 10px);
+}
+.cross img {
+  width: 10px;
+  height: 10px;
+}
 @media(max-width:920px) {
   h1 {
     font-size: 1rem;

@@ -30,7 +30,12 @@
           <form class="form" id="form1">
             <div class="field">
               <p>Модель ноутбука</p>
-              <input type="text" id="name" name="model">
+              <div id="model">
+                <input type="text" name="model">
+                <div class="cross">
+                  <img src="./assets/cross.png" alt="cross">
+                </div>
+              </div>
               <input type="hidden" id="hidden" name="hidden" value="secretNumber">
             </div>
             <div class="field">
@@ -42,15 +47,23 @@
                 <label for="option2">8GB</label>
                 <input type="checkbox" name="option3" id="option3" value="4">
                 <label for="option2">4GB</label>
+                <div class="cross">
+                  <img src="./assets/cross.png" alt="cross">
+                </div>
               </div>
             </div>
             <div class="field">
               <p>Процессор</p>
-              <select id="select" name="select"> 
-                <option value="Intel">Intel</option> 
-                <option value="AMD">AMD</option> 
-                <option value="Qualcom">Qualcom</option> 
-              </select> 
+              <div id="select-box">
+                <select id="select" name="select"> 
+                  <option value="Intel">Intel</option> 
+                  <option value="AMD">AMD</option> 
+                  <option value="Qualcom">Qualcom</option> 
+                </select>
+                <div class="cross">
+                  <img src="./assets/cross.png" alt="cross">
+                </div>
+              </div>
             </div>
             <div class="field">
               <p>Цвет</p>
@@ -61,15 +74,28 @@
                 <label for="radio-2">Белый</label>
                 <input type="radio" id="radio-3" name="radio" value="Золотой">
                 <label for="radio-3">Золотой</label>
+                <div class="cross">
+                  <img src="./assets/cross.png" alt="cross">
+                </div>
               </div>
             </div>
             <div class="field">
               <p>Комментарий</p>
-              <textarea id="textarea" name="textarea"></textarea>
+              <div id="textarea">
+                <textarea name="textarea"></textarea>
+                <div class="cross">
+                  <img src="./assets/cross.png" alt="cross">
+                </div>
+              </div>
             </div>
             <div class="field">
               <p>Email</p>
-              <input type="email" id="email" name="email">
+              <div id="email">
+                <input type="email" name="email">
+                <div class="cross">
+                  <img src="./assets/cross.png" alt="cross">
+                </div>
+              </div>
             </div>
           </form>
           <div class="field button-field">
