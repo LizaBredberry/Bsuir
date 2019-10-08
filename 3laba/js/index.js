@@ -1,4 +1,4 @@
-const tableHeader = ['Ноубук', 'Память', 'Процессор', 'Цвет', 'Комментарий', 'Email']
+const tableHeader = ['Ноутбук', 'Память', 'Процессор', 'Цвет', 'Комментарий', 'Email']
 let tableInfo = []
 function submit() {
   if (validation()) {
@@ -16,20 +16,71 @@ function submit() {
 }
 function validation() {
   const reEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/i
-  if (document.getElementById('name').value === ''
-  || document.getElementById('textarea').value === ''
-  || document.getElementById('email').value === ''
-  || document.getElementById('list').options[document.getElementById('list').selectedIndex].value === ''
-  || document.querySelector('[type="radio"]:checked').value === '') {
-    return false
+  let bool = true
+  let fields = [{
+    type: 'input',
+    inputName: 'model'
+  },
+  {
+    type: 'select',
+    inputName: 'select'
+  },
+  {
+    type: 'input',
+    inputName: 'radio'
+  },
+  {
+    type: 'textarea',
+    inputName: 'textarea'
+  },
+  {
+    type: 'input',
+    inputName: 'email'
+  }]
+  fields.forEach(field => checkValidField(field.type, field.inputName))
+  if (fields.some(field => validateField(field.type, field.inputName))) {
+    bool = false
   }
   if (!document.querySelectorAll('[type="checkbox"]:checked').length) {
-    return false
+    document.getElementById('checkbox-box').classList.add('error')
+    setTimeout(() => {
+      document.getElementById('checkbox-box').classList.remove('error')
+    }, 300)
+    bool = false
   }
   if (!reEmail.test(document.getElementById('email').value)) {
+    bool = false
+  }
+  return bool
+}
+
+function validateField(type, inputName) {
+  return document.querySelector(type + '[name=\"' + inputName + '\"]').value === ''
+}
+
+function checkValidField(type, inputName) {
+  if (document.querySelector(type + '[name=\"' + inputName + '\"]').value === '') {
+    document.querySelector(type + '[name=\"' + inputName + '\"]').classList.add('error')
+    setTimeout(() => {
+      document.querySelector(type + '[name=\"' + inputName + '\"]').classList.remove('error')
+    }, 300)
+    return true
+  // } else if (inputName === 'select' || inputName === 'radio') {
+  //   if (inputName === 'radio' && document.querySelector('[type="radio"]:checked').value) {
+  //     document.getElementById(inputName).classList.add('error')
+  //     setTimeout(() => {
+  //       document.getElementById(inputName).classList.remove('error')
+  //     }, 300)
+  //   }
+  //   if (inputName === 'select' && document.getElementById('select').options[document.getElementById('select').selectedIndex].value === '') {
+  //     document.getElementById(inputName).classList.add('error')
+  //     setTimeout(() => {
+  //       document.getElementById(inputName).classList.remove('error')
+  //     }, 300)
+  //   }
+  } else {
     return false
   }
-  return true
 }
 
 function setItems() {
@@ -38,7 +89,7 @@ function setItems() {
   let formObject = {
     name: document.getElementById('name').value,
     memory,
-    cpu: document.getElementById('list').options[document.getElementById('list').selectedIndex].value,
+    cpu: document.getElementById('select').options[document.getElementById('select').selectedIndex].value,
     color: document.querySelector('[type="radio"]:checked').value,
     comment: document.getElementById('textarea').value,
     email: document.getElementById('email').value
@@ -51,7 +102,7 @@ function clearFields() {
   document.getElementById('name').value = ''
   document.getElementById('textarea').value = ''
   document.getElementById('email').value = ''
-  document.getElementById('list').selectedIndex = 0
+  document.getElementById('select').selectedIndex = 0
   let radios = document.getElementsByName("radio")
   let checkboxes = document.querySelectorAll('[type="checkbox"]:checked')
   for (let i = 0 ; i < radios.length; i++) {
@@ -84,6 +135,7 @@ function clearTable() {
 function createTable() {
   let tableElem = document.createElement('table')
   let tbodyElem = document.createElement('tbody')
+  let ol = document.createElement('ol')
   for (let i = 0; i <= tableInfo.length; i++) { // цикл строк
     if (i === 0) {// условие для построение главной шапки таблицы
       let tr = document.createElement('tr')
@@ -95,12 +147,15 @@ function createTable() {
       }
     }
     let tr = document.createElement('tr')
-    if (tableInfo.length) {
+    let li = document.createElement('li')
+    if (tableInfo.length && tableInfo[i]) {
       for (let key in tableInfo[i]) { // цикл столбцов
         let td = document.createElement('td')
         td.appendChild(document.createTextNode(tableInfo[i][key])) // добавляет текст в тег
         tr.appendChild(td)
       }
+      li.appendChild(document.createTextNode(tableInfo[i]['name']))
+      ol.appendChild(li)
     } else {
       let td = document.createElement('td')
       td.appendChild(document.createTextNode('Таблица пуста')) // добавляет текст в тег
@@ -112,74 +167,73 @@ function createTable() {
     }
   }
   tableElem.appendChild(tbodyElem)
-  openWindow(tableElem.outerHTML)
+  openWindow(tableElem.outerHTML, ol.outerHTML)
 }
 
-function openWindow(data) {
-  var newWindow = window.open('', '_blank', 'width="+screen.availWidth+", resizable=yes, height="+screen.availHeight"');
-  newWindow.document.write('<link rel="stylesheet" href="css/style.css">');
-  newWindow.document.write(
-    '<head>' +
-      '<meta charset="UTF-8">' +
-      '<meta name="viewport" content="width=device-width, initial-scale=1.0">' +
-      '<meta http-equiv="X-UA-Compatible" content="ie=edge">' +
-      '<link rel="stylesheet" href="css/style.css">' +
-      '<title>Main page</title>' +
-    '</head>' +
-    '<body>' +
-      '<div class="flex-container">' +
-        '<header>' +
-          '<div class="header">' +
-            '<img src="./assets/logo.svg" alt="logo">' +
-            '<h1>Магазин ноутбуков Xiaomi</h1>' +
-            '<span class="info-text"> +375 (29) 182-78-43</span>' +
-            '<span class="info-text"> 10:00 – 21:00</span>' +
-          '</div>' +
-        '</header>' +
-        '<div class="container">' +
-          '<nav class="nav-bar">' +
-            '<p onclick="window.close()">Закрыть окно</p>' +
-          '</nav>' +
-          '<section class="main-page">' +
-            '<div class="line">' +
-              '<h2>Результаты</h2>' +
-            '</div>' +
-            '<div class="main-block">' +
-              '<div class="field">' +
-                '<h3 class="t-a-s">Таблица</h3>' +
-              '</div>' +
-              '<div class="field" id="table">' +
-                data +
-              '</div>' +
-              '<div class="field">' +
-                '<button type="button" onclick="clearTable()">Очистить</button>' +
-              '</div>' +
-            '</div>' +
-          '</section>' +
-          '<section class="side-bar"></section>' +
+function openWindow(data, list) {
+  let params = ''
+  params  = 'width='+screen.width
+  params += ', height='+screen.height
+  params += ', top=0, left=0'
+  params += ', fullscreen=yes'
+  params += ', directories=no'
+  params += ', location=no'
+  params += ', menubar=no'
+  params += ', resizable=no'
+  params += ', scrollbars=no'
+  params += ', status=no'
+  params += ', toolbar=no'
+  let document = 
+  '<head>' +
+    '<meta charset="UTF-8">' +
+    '<meta name="viewport" content="width=device-width, initial-scale=1.0">' +
+    '<meta http-equiv="X-UA-Compatible" content="ie=edge">' +
+    '<link rel="stylesheet" href="css/style.css">' +
+    '<title>Main page</title>' +
+  '</head>' +
+  '<body>' +
+    '<div class="flex-container">' +
+      '<header>' +
+        '<div class="header">' +
+          '<img src="./assets/logo.svg" alt="logo">' +
+          '<h1>Магазин ноутбуков Xiaomi</h1>' +
+          '<span class="info-text"> +375 (29) 182-78-43</span>' +
+          '<span class="info-text"> 10:00 – 21:00</span>' +
         '</div>' +
-        '<footer>' +
-          '<p>© 2017–2019 Общество с ограниченной ответственностью "МИ БАЙ" 224030 г. Брест, ул. Советская, д.56</p>' +
-          '<p>Разработка интернет-магазина — Новый сайт</p>' +
-        '</footer>' +
+      '</header>' +
+      '<div class="container">' +
+        '<nav class="nav-bar">' +
+          '<p onclick="window.close()">Закрыть окно</p>' +
+        '</nav>' +
+        '<section class="main-page">' +
+          '<div class="line">' +
+            '<h2>Результаты</h2>' +
+          '</div>' +
+          '<div class="main-block">' +
+            '<div class="field">' +
+              '<h3 class="t-a-s">Таблица</h3>' +
+            '</div>' +
+            '<div class="field" id="table">' +
+              data +
+            '</div>' +
+            '<div class="field" id="list">' +
+              list +
+            '</div>' +
+            '<div class="field">' +
+              '<button type="button" onclick="clearTable()">Очистить</button>' +
+            '</div>' +
+          '</div>' +
+        '</section>' +
+        '<section class="side-bar"></section>' +
       '</div>' +
-      '<script src="./js/index.js"></script>' +
-    '</body>'
-  )
-}
-
-function tableCreate() {
-  if (tableInfo.length) {
-    let tbodyInner = ''
-    for (let i = 0; i < tableInfo.length + 1; i++) {
-      tbodyInner = tbodyInner + '<tr>'
-      for (let key in tableInfo[i]) {
-        tbodyInner = tbodyInner + '<td>' + tableInfo[i][key] + '</td>'
-      }
-      tbodyInner = tbodyInner + '</tr>'
-    }
-    return tbodyInner
-  } else {
-    return '<tr><td colspan="6">Таблица пуста</td></tr>'
-  }
+      '<footer>' +
+        '<p>© 2017–2019 Общество с ограниченной ответственностью "МИ БАЙ" 224030 г. Брест, ул. Советская, д.56</p>' +
+        '<p>Разработка интернет-магазина — Новый сайт</p>' +
+      '</footer>' +
+    '</div>' +
+    '<script src="./js/index.js"></script>' +
+  '</body>'
+  let newWindow = window.open('', 'Результаты', params)
+  newWindow.document.write('<link rel="stylesheet" href="css/style.css">')
+  newWindow.document.write(document)
 }

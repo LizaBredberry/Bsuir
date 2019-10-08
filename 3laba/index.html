@@ -35,7 +35,7 @@
             </div>
             <div class="field">
               <p>Оперативная память</p>
-              <div class="checkbox-box">
+              <div class="checkbox-box" id="checkbox-box">
                 <input type="checkbox" name="option1" id="option1" value="16">
                 <label for="option1">16GB</label>
                 <input type="checkbox" name="option2" id="option2" value="8">
@@ -46,7 +46,7 @@
             </div>
             <div class="field">
               <p>Процессор</p>
-              <select id="list"> 
+              <select id="select" name="select"> 
                 <option value="Intel">Intel</option> 
                 <option value="AMD">AMD</option> 
                 <option value="Qualcom">Qualcom</option> 
@@ -54,7 +54,7 @@
             </div>
             <div class="field">
               <p>Цвет</p>
-              <div class="checkbox-box">
+              <div class="checkbox-box" id="radio">
                 <input type="radio" id="radio-1" name="radio" value="Чёрный">
                 <label for="radio-1">Чёрный</label>
                 <input type="radio" id="radio-2" name="radio" value="Белый">
@@ -65,11 +65,11 @@
             </div>
             <div class="field">
               <p>Комментарий</p>
-              <textarea id="textarea"></textarea>
+              <textarea id="textarea" name="textarea"></textarea>
             </div>
             <div class="field">
               <p>Email</p>
-              <input type="email" id="email">
+              <input type="email" id="email" name="email">
             </div>
           </form>
           <div class="field button-field">

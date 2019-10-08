@@ -233,3 +233,12 @@ td {
     font-size: 0.7rem;
   }
 }
+
+#list {
+  display: flex;
+  justify-content: center;
+}
+
+#list ol li {
+  list-style-type: none;
+}
