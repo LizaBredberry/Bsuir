@@ -65,19 +65,19 @@ function checkValidField(type, inputName) {
       document.querySelector(type + '[name=\"' + inputName + '\"]').classList.remove('error')
     }, 300)
     return true
-  // } else if (inputName === 'select' || inputName === 'radio') {
-  //   if (inputName === 'radio' && document.querySelector('[type="radio"]:checked').value) {
-  //     document.getElementById(inputName).classList.add('error')
-  //     setTimeout(() => {
-  //       document.getElementById(inputName).classList.remove('error')
-  //     }, 300)
-  //   }
-  //   if (inputName === 'select' && document.getElementById('select').options[document.getElementById('select').selectedIndex].value === '') {
-  //     document.getElementById(inputName).classList.add('error')
-  //     setTimeout(() => {
-  //       document.getElementById(inputName).classList.remove('error')
-  //     }, 300)
-  //   }
+  } else if (inputName === 'select' || inputName === 'radio') {
+    if (inputName === 'radio' && !document.querySelector('[type="radio"]:checked')) {
+      document.getElementById(inputName).classList.add('error')
+      setTimeout(() => {
+        document.getElementById(inputName).classList.remove('error')
+      }, 300)
+    }
+    if (inputName === 'select' && document.getElementById('select').options[document.getElementById('select').selectedIndex].value) {
+      document.getElementById(inputName).classList.add('error')
+      setTimeout(() => {
+        document.getElementById(inputName).classList.remove('error')
+      }, 300)
+    }
   } else {
     return false
   }
