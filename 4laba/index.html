@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Main page</title>
+</head>
+<body>
+  <div class="container">
+    <section class="main-page">
+      <div class="main-block">
+        <form class="form" id="form1">
+          <div class="field">
+            <p>Добавление элементов</p>
+            <div id="model" class="field-info">
+              <input type="text" name="model">
+              <button id="button" type="button" onclick="addItem()">Добавить</button>
+            </div>
+          </div>
+          <div class="field">
+            <p>Список элементов</p>
+            <div id="select-box" class="field-info">
+              <select id="select" name="select">
+                <option value="First item">First item</option>
+                <option value="Second item">Second item</option>
+                <option value="Third item">Third item</option>
+                <option value="Fourth item">Fourth item</option>
+                <option value="Fifth item">Fifth item</option>
+              </select>
+              <button type="button" onclick="deleteItem()">Удалить</button>
+            </div>
+          </div>
+        </form>
+        <div class="field button-field">
+          <button id="button" type="button" onclick="createTable()">Посмотреть удалённые</button>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script src="./js/index.js"></script>
+</body>
+</html>
